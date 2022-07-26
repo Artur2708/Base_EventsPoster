@@ -1,0 +1,1830 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище EventsPoster2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Archive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Event" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Event_Category_Id" Type="int" Nullable="false" />
+          <Property Name="Date_Start" Type="date" Nullable="false" />
+          <Property Name="Date_Finish" Type="date" Nullable="false" />
+          <Property Name="Сity" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Time_" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Event_description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Age_limitation" Type="int" Nullable="false" />
+          <Property Name="Maximum_count_tickets" Type="int" Nullable="false" />
+          <Property Name="Purchased_count_tickets" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BD" Type="date" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients_Event_">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Event_id" Type="int" Nullable="false" />
+          <Property Name="Client_Id" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Purchase_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event_">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Event" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Event_Category_Id" Type="int" Nullable="false" />
+          <Property Name="Date_Start" Type="date" Nullable="false" />
+          <Property Name="Date_Finish" Type="date" Nullable="false" />
+          <Property Name="Сity" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Time_" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Event_description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Age_limitation" Type="int" Nullable="false" />
+          <Property Name="Maximum_count_tickets" Type="int" Nullable="false" />
+          <Property Name="Purchased_count_tickets" Type="int" Nullable="false" />
+          <Property Name="Price_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pictures_Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Name_" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Picture" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Pictures_Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="Name_" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Picture" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Min_" Type="money" />
+          <Property Name="Ave" Type="money" />
+          <Property Name="Max_" Type="money" />
+        </EntityType>
+        <EntityType Name="Сategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Archive__Event_C__5812160E">
+          <End Role="Сategories" Type="Self.Сategories" Multiplicity="1" />
+          <End Role="Archive" Type="Self.Archive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Archive">
+              <PropertyRef Name="Event_Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clients_E__Clien__571DF1D5">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Clients_Event_" Type="Self.Clients_Event_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients_Event_">
+              <PropertyRef Name="Client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clients_E__Event__5629CD9C">
+          <End Role="Event_" Type="Self.Event_" Multiplicity="1" />
+          <End Role="Clients_Event_" Type="Self.Clients_Event_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event_">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients_Event_">
+              <PropertyRef Name="Event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Event___Event_Ca__5441852A">
+          <End Role="Сategories" Type="Self.Сategories" Multiplicity="1" />
+          <End Role="Event_" Type="Self.Event_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event_">
+              <PropertyRef Name="Event_Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Event___Price_id__5535A963">
+          <End Role="Price" Type="Self.Price" Multiplicity="1" />
+          <End Role="Event_" Type="Self.Event_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event_">
+              <PropertyRef Name="Price_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pictures___Clien__534D60F1">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Pictures_Client" Type="Self.Pictures_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pictures_Client">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pictures___Event__5070F446">
+          <End Role="Event_" Type="Self.Event_" Multiplicity="1" />
+          <End Role="Pictures_Event" Type="Self.Pictures_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event_">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pictures_Event">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Active_client_sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Actual_events_sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Event_for_today_sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Sold_in_3_days_sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Sold_out_all_tickets_sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="stp_Actual_Event_for_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Cat_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Client_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Clients_Event_Search_Client_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Clients_Event_Search_Event_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Del_Archive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Del_Cat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Delete_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Delete_Date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFinish" Type="date" Mode="In" />
+        </Function>
+        <Function Name="stp_Delete_Event_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Delete_Pictures_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Delete_Pictures_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Delete_Price" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Delete_Ticket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Delete_Ticket_Client_info" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Client" Type="int" Mode="In" />
+          <Parameter Name="ID_Event" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Event_Category_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_cat" Type="int" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Event_City" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Event_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Event_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_client" Type="int" Mode="In" />
+          <Parameter Name="Count_" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="stp_Event_dateNow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="stp_info_Archive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="stp_Info_client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="stp_info_Client_Event_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="stp_info_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="stp_info_Сategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="stp_insert_Archive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name_Event" Type="nvarchar" Mode="In" />
+          <Parameter Name="Event_Category_Id" Type="int" Mode="In" />
+          <Parameter Name="Date_Start" Type="date" Mode="In" />
+          <Parameter Name="Date_Finish" Type="date" Mode="In" />
+          <Parameter Name="Сity" Type="nvarchar" Mode="In" />
+          <Parameter Name="Place" Type="nvarchar" Mode="In" />
+          <Parameter Name="Time_" Type="time" Mode="In" />
+          <Parameter Name="Event_description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Age_limitation" Type="int" Mode="In" />
+          <Parameter Name="Maximum_count_tickets" Type="int" Mode="In" />
+          <Parameter Name="Purchased_count_tickets" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Insert_Cat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="stp_Insert_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="BD" Type="date" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="stp_Insert_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name_Event" Type="nvarchar" Mode="In" />
+          <Parameter Name="Event_Category_Id" Type="int" Mode="In" />
+          <Parameter Name="Date_Start" Type="date" Mode="In" />
+          <Parameter Name="Date_Finish" Type="date" Mode="In" />
+          <Parameter Name="Сity" Type="nvarchar" Mode="In" />
+          <Parameter Name="Place" Type="nvarchar" Mode="In" />
+          <Parameter Name="Time_" Type="time" Mode="In" />
+          <Parameter Name="Event_description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Age_limitation" Type="int" Mode="In" />
+          <Parameter Name="Maximum_count_tickets" Type="int" Mode="In" />
+          <Parameter Name="Purchased_count_tickets" Type="int" Mode="In" />
+          <Parameter Name="Price_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_insert_Pictures_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="Name_" Type="varchar" Mode="In" />
+          <Parameter Name="Picture" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="stp_insert_Pictures_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="int" Mode="In" />
+          <Parameter Name="Name_" Type="varchar" Mode="In" />
+          <Parameter Name="Picture" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="stp_insert_Price" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Min_" Type="money" Mode="In" />
+          <Parameter Name="Ave" Type="money" Mode="In" />
+          <Parameter Name="Max_" Type="money" Mode="In" />
+        </Function>
+        <Function Name="stp_Insert_Ticket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Event_id" Type="int" Mode="In" />
+          <Parameter Name="Client_Id" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="money" Mode="In" />
+          <Parameter Name="Purchase_date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="stp_Name_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="symbol" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="stp_Price_Event_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Price_Event_Search" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="money" Mode="In" />
+        </Function>
+        <Function Name="stp_Select_ID_Archive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_SelID_Client_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Ticket_for_cat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_cat" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Ticket_Update_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Event" Type="int" Mode="In" />
+          <Parameter Name="num" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Update_Archive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Name_Event" Type="nvarchar" Mode="In" />
+          <Parameter Name="Event_Category_Id" Type="int" Mode="In" />
+          <Parameter Name="Date_Start" Type="date" Mode="In" />
+          <Parameter Name="Date_Finish" Type="date" Mode="In" />
+          <Parameter Name="Сity" Type="nvarchar" Mode="In" />
+          <Parameter Name="Place" Type="nvarchar" Mode="In" />
+          <Parameter Name="Time_" Type="time" Mode="In" />
+          <Parameter Name="Event_description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Age_limitation" Type="int" Mode="In" />
+          <Parameter Name="Maximum_count_tickets" Type="int" Mode="In" />
+          <Parameter Name="Purchased_count_tickets" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Update_Cat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Category" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="stp_Update_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="BD" Type="date" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="stp_Update_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Name_Event" Type="nvarchar" Mode="In" />
+          <Parameter Name="Event_Category_Id" Type="int" Mode="In" />
+          <Parameter Name="Date_Start" Type="date" Mode="In" />
+          <Parameter Name="Date_Finish" Type="date" Mode="In" />
+          <Parameter Name="Сity" Type="nvarchar" Mode="In" />
+          <Parameter Name="Place" Type="nvarchar" Mode="In" />
+          <Parameter Name="Time_" Type="time" Mode="In" />
+          <Parameter Name="Event_description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Age_limitation" Type="int" Mode="In" />
+          <Parameter Name="Maximum_count_tickets" Type="int" Mode="In" />
+          <Parameter Name="Purchased_count_tickets" Type="int" Mode="In" />
+          <Parameter Name="Price_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="stp_Update_Pictures_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="Name_" Type="varchar" Mode="In" />
+          <Parameter Name="Picture" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="stp_Update_Pictures_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="EventID" Type="int" Mode="In" />
+          <Parameter Name="Name_" Type="varchar" Mode="In" />
+          <Parameter Name="Picture" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="stp_Update_Price" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="Min_" Type="money" Mode="In" />
+          <Parameter Name="Ave" Type="money" Mode="In" />
+          <Parameter Name="Max_" Type="money" Mode="In" />
+        </Function>
+        <Function Name="stp_Update_Ticket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Event_id" Type="int" Mode="In" />
+          <Parameter Name="Client_Id" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="money" Mode="In" />
+          <Parameter Name="Purchase_date" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище EventsPoster2ModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Archive" EntityType="Self.Archive" Schema="poster" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="poster" store:Type="Tables" />
+          <EntitySet Name="Clients_Event_" EntityType="Self.Clients_Event_" Schema="poster" store:Type="Tables" />
+          <EntitySet Name="Event_" EntityType="Self.Event_" Schema="poster" store:Type="Tables" />
+          <EntitySet Name="Pictures_Client" EntityType="Self.Pictures_Client" Schema="poster" store:Type="Tables" />
+          <EntitySet Name="Pictures_Event" EntityType="Self.Pictures_Event" Schema="poster" store:Type="Tables" />
+          <EntitySet Name="Price" EntityType="Self.Price" Schema="poster" store:Type="Tables" />
+          <EntitySet Name="Сategories" EntityType="Self.Сategories" Schema="poster" store:Type="Tables" />
+          <AssociationSet Name="FK__Archive__Event_C__5812160E" Association="Self.FK__Archive__Event_C__5812160E">
+            <End Role="Сategories" EntitySet="Сategories" />
+            <End Role="Archive" EntitySet="Archive" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clients_E__Clien__571DF1D5" Association="Self.FK__Clients_E__Clien__571DF1D5">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Clients_Event_" EntitySet="Clients_Event_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clients_E__Event__5629CD9C" Association="Self.FK__Clients_E__Event__5629CD9C">
+            <End Role="Event_" EntitySet="Event_" />
+            <End Role="Clients_Event_" EntitySet="Clients_Event_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Event___Event_Ca__5441852A" Association="Self.FK__Event___Event_Ca__5441852A">
+            <End Role="Сategories" EntitySet="Сategories" />
+            <End Role="Event_" EntitySet="Event_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Event___Price_id__5535A963" Association="Self.FK__Event___Price_id__5535A963">
+            <End Role="Price" EntitySet="Price" />
+            <End Role="Event_" EntitySet="Event_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pictures___Clien__534D60F1" Association="Self.FK__Pictures___Clien__534D60F1">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Pictures_Client" EntitySet="Pictures_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pictures___Event__5070F446" Association="Self.FK__Pictures___Event__5070F446">
+            <End Role="Event_" EntitySet="Event_" />
+            <End Role="Pictures_Event" EntitySet="Pictures_Event" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventsPoster2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Archive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Event" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Event_Category_Id" Type="Int32" Nullable="false" />
+          <Property Name="Date_Start" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_Finish" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Сity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Place" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time_" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Event_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age_limitation" Type="Int32" Nullable="false" />
+          <Property Name="Maximum_count_tickets" Type="Int32" Nullable="false" />
+          <Property Name="Purchased_count_tickets" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Сategories" Relationship="Self.FK__Archive__Event_C__5812160E" FromRole="Archive" ToRole="Сategories" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BD" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients_Event_" Relationship="Self.FK__Clients_E__Clien__571DF1D5" FromRole="Clients" ToRole="Clients_Event_" />
+          <NavigationProperty Name="Pictures_Client" Relationship="Self.FK__Pictures___Clien__534D60F1" FromRole="Clients" ToRole="Pictures_Client" />
+        </EntityType>
+        <EntityType Name="Clients_Event_">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_id" Type="Int32" Nullable="false" />
+          <Property Name="Client_Id" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Purchase_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Clients_E__Clien__571DF1D5" FromRole="Clients_Event_" ToRole="Clients" />
+          <NavigationProperty Name="Event_" Relationship="Self.FK__Clients_E__Event__5629CD9C" FromRole="Clients_Event_" ToRole="Event_" />
+        </EntityType>
+        <EntityType Name="Event_">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Event" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Event_Category_Id" Type="Int32" Nullable="false" />
+          <Property Name="Date_Start" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_Finish" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Сity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Place" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time_" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Event_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age_limitation" Type="Int32" Nullable="false" />
+          <Property Name="Maximum_count_tickets" Type="Int32" Nullable="false" />
+          <Property Name="Purchased_count_tickets" Type="Int32" Nullable="false" />
+          <Property Name="Price_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients_Event_" Relationship="Self.FK__Clients_E__Event__5629CD9C" FromRole="Event_" ToRole="Clients_Event_" />
+          <NavigationProperty Name="Сategories" Relationship="Self.FK__Event___Event_Ca__5441852A" FromRole="Event_" ToRole="Сategories" />
+          <NavigationProperty Name="Price" Relationship="Self.FK__Event___Price_id__5535A963" FromRole="Event_" ToRole="Price" />
+          <NavigationProperty Name="Pictures_Event" Relationship="Self.FK__Pictures___Event__5070F446" FromRole="Event_" ToRole="Pictures_Event" />
+        </EntityType>
+        <EntityType Name="Pictures_Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Name_" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Pictures___Clien__534D60F1" FromRole="Pictures_Client" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Pictures_Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="Name_" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Event_" Relationship="Self.FK__Pictures___Event__5070F446" FromRole="Pictures_Event" ToRole="Event_" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Min_" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Ave" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Max_" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Event_" Relationship="Self.FK__Event___Price_id__5535A963" FromRole="Price" ToRole="Event_" />
+        </EntityType>
+        <EntityType Name="Сategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Archive" Relationship="Self.FK__Archive__Event_C__5812160E" FromRole="Сategories" ToRole="Archive" />
+          <NavigationProperty Name="Event_" Relationship="Self.FK__Event___Event_Ca__5441852A" FromRole="Сategories" ToRole="Event_" />
+        </EntityType>
+        <Association Name="FK__Archive__Event_C__5812160E">
+          <End Role="Сategories" Type="Self.Сategories" Multiplicity="1" />
+          <End Role="Archive" Type="Self.Archive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Archive">
+              <PropertyRef Name="Event_Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clients_E__Clien__571DF1D5">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Clients_Event_" Type="Self.Clients_Event_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients_Event_">
+              <PropertyRef Name="Client_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pictures___Clien__534D60F1">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Pictures_Client" Type="Self.Pictures_Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pictures_Client">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Clients_E__Event__5629CD9C">
+          <End Role="Event_" Type="Self.Event_" Multiplicity="1" />
+          <End Role="Clients_Event_" Type="Self.Clients_Event_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event_">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients_Event_">
+              <PropertyRef Name="Event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Event___Event_Ca__5441852A">
+          <End Role="Сategories" Type="Self.Сategories" Multiplicity="1" />
+          <End Role="Event_" Type="Self.Event_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event_">
+              <PropertyRef Name="Event_Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Event___Price_id__5535A963">
+          <End Role="Price" Type="Self.Price" Multiplicity="1" />
+          <End Role="Event_" Type="Self.Event_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event_">
+              <PropertyRef Name="Price_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pictures___Event__5070F446">
+          <End Role="Event_" Type="Self.Event_" Multiplicity="1" />
+          <End Role="Pictures_Event" Type="Self.Pictures_Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event_">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pictures_Event">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EventsPoster2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Archive" EntityType="Self.Archive" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Clients_Event_" EntityType="Self.Clients_Event_" />
+          <EntitySet Name="Event_" EntityType="Self.Event_" />
+          <EntitySet Name="Pictures_Client" EntityType="Self.Pictures_Client" />
+          <EntitySet Name="Pictures_Event" EntityType="Self.Pictures_Event" />
+          <EntitySet Name="Price" EntityType="Self.Price" />
+          <EntitySet Name="Сategories" EntityType="Self.Сategories" />
+          <AssociationSet Name="FK__Archive__Event_C__5812160E" Association="Self.FK__Archive__Event_C__5812160E">
+            <End Role="Сategories" EntitySet="Сategories" />
+            <End Role="Archive" EntitySet="Archive" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clients_E__Clien__571DF1D5" Association="Self.FK__Clients_E__Clien__571DF1D5">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Clients_Event_" EntitySet="Clients_Event_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pictures___Clien__534D60F1" Association="Self.FK__Pictures___Clien__534D60F1">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Pictures_Client" EntitySet="Pictures_Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Clients_E__Event__5629CD9C" Association="Self.FK__Clients_E__Event__5629CD9C">
+            <End Role="Event_" EntitySet="Event_" />
+            <End Role="Clients_Event_" EntitySet="Clients_Event_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Event___Event_Ca__5441852A" Association="Self.FK__Event___Event_Ca__5441852A">
+            <End Role="Сategories" EntitySet="Сategories" />
+            <End Role="Event_" EntitySet="Event_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Event___Price_id__5535A963" Association="Self.FK__Event___Price_id__5535A963">
+            <End Role="Price" EntitySet="Price" />
+            <End Role="Event_" EntitySet="Event_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pictures___Event__5070F446" Association="Self.FK__Pictures___Event__5070F446">
+            <End Role="Event_" EntitySet="Event_" />
+            <End Role="Pictures_Event" EntitySet="Pictures_Event" />
+          </AssociationSet>
+          <FunctionImport Name="Active_client_sp" ReturnType="Collection(EventsPoster2Model.Active_client_sp_Result)" />
+          <FunctionImport Name="Actual_events_sp" ReturnType="Collection(EventsPoster2Model.Actual_events_sp_Result)" />
+          <FunctionImport Name="Event_for_today_sp" ReturnType="Collection(EventsPoster2Model.Event_for_today_sp_Result)" />
+          <FunctionImport Name="Sold_in_3_days_sp" ReturnType="Collection(EventsPoster2Model.Sold_in_3_days_sp_Result)" />
+          <FunctionImport Name="Sold_out_all_tickets_sp" ReturnType="Collection(EventsPoster2Model.Sold_out_all_tickets_sp_Result)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(EventsPoster2Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(EventsPoster2Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="stp_Actual_Event_for_Client" ReturnType="Collection(EventsPoster2Model.stp_Actual_Event_for_Client_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Cat_Event" ReturnType="Collection(EventsPoster2Model.stp_Cat_Event_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Client_Event" ReturnType="Collection(EventsPoster2Model.stp_Client_Event_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Clients_Event_Search_Client_Id" ReturnType="Collection(EventsPoster2Model.stp_Clients_Event_Search_Client_Id_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Clients_Event_Search_Event_id" ReturnType="Collection(EventsPoster2Model.stp_Clients_Event_Search_Event_id_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Del_Archive">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Del_Cat">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Delete_Client">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Delete_Date">
+            <Parameter Name="DateFinish" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Delete_Event_">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Delete_Pictures_Client">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Delete_Pictures_Event">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Delete_Price">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Delete_Ticket">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Delete_Ticket_Client_info">
+            <Parameter Name="ID_Client" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Event" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Event_Category_Id" ReturnType="Collection(EventsPoster2Model.stp_Event_Category_Id_Result)">
+            <Parameter Name="id_cat" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Event_City" ReturnType="Collection(EventsPoster2Model.stp_Event_City_Result)">
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Event_Client" ReturnType="Collection(EventsPoster2Model.stp_Event_Client_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Event_Count">
+            <Parameter Name="ID_client" Mode="In" Type="Int32" />
+            <Parameter Name="Count_" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Event_dateNow" ReturnType="Collection(EventsPoster2Model.stp_Event_dateNow_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="stp_info_Archive" ReturnType="Collection(EventsPoster2Model.stp_info_Archive_Result)" />
+          <FunctionImport Name="stp_Info_client" ReturnType="Collection(EventsPoster2Model.stp_Info_client_Result)" />
+          <FunctionImport Name="stp_info_Client_Event_" ReturnType="Collection(EventsPoster2Model.stp_info_Client_Event__Result)" />
+          <FunctionImport Name="stp_info_Event" ReturnType="Collection(EventsPoster2Model.stp_info_Event_Result)" />
+          <FunctionImport Name="stp_info_Сategories" ReturnType="Collection(EventsPoster2Model.stp_info_Сategories_Result)" />
+          <FunctionImport Name="stp_insert_Archive">
+            <Parameter Name="Name_Event" Mode="In" Type="String" />
+            <Parameter Name="Event_Category_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Date_Start" Mode="In" Type="DateTime" />
+            <Parameter Name="Date_Finish" Mode="In" Type="DateTime" />
+            <Parameter Name="Сity" Mode="In" Type="String" />
+            <Parameter Name="Place" Mode="In" Type="String" />
+            <Parameter Name="Time_" Mode="In" Type="Time" />
+            <Parameter Name="Event_description" Mode="In" Type="String" />
+            <Parameter Name="Age_limitation" Mode="In" Type="Int32" />
+            <Parameter Name="Maximum_count_tickets" Mode="In" Type="Int32" />
+            <Parameter Name="Purchased_count_tickets" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Insert_Cat">
+            <Parameter Name="Category" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Insert_Client">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="BD" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Insert_Event">
+            <Parameter Name="Name_Event" Mode="In" Type="String" />
+            <Parameter Name="Event_Category_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Date_Start" Mode="In" Type="DateTime" />
+            <Parameter Name="Date_Finish" Mode="In" Type="DateTime" />
+            <Parameter Name="Сity" Mode="In" Type="String" />
+            <Parameter Name="Place" Mode="In" Type="String" />
+            <Parameter Name="Time_" Mode="In" Type="Time" />
+            <Parameter Name="Event_description" Mode="In" Type="String" />
+            <Parameter Name="Age_limitation" Mode="In" Type="Int32" />
+            <Parameter Name="Maximum_count_tickets" Mode="In" Type="Int32" />
+            <Parameter Name="Purchased_count_tickets" Mode="In" Type="Int32" />
+            <Parameter Name="Price_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_insert_Pictures_Client">
+            <Parameter Name="ClientID" Mode="In" Type="Int32" />
+            <Parameter Name="Name_" Mode="In" Type="String" />
+            <Parameter Name="Picture" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="stp_insert_Pictures_Event">
+            <Parameter Name="EventID" Mode="In" Type="Int32" />
+            <Parameter Name="Name_" Mode="In" Type="String" />
+            <Parameter Name="Picture" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="stp_insert_Price">
+            <Parameter Name="Min_" Mode="In" Type="Decimal" />
+            <Parameter Name="Ave" Mode="In" Type="Decimal" />
+            <Parameter Name="Max_" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Insert_Ticket">
+            <Parameter Name="Event_id" Mode="In" Type="Int32" />
+            <Parameter Name="Client_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+            <Parameter Name="Purchase_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Name_Event" ReturnType="Collection(EventsPoster2Model.stp_Name_Event_Result)">
+            <Parameter Name="symbol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Price_Event_" ReturnType="Collection(EventsPoster2Model.stp_Price_Event__Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Price_Event_Search" ReturnType="Collection(EventsPoster2Model.stp_Price_Event_Search_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Select_ID_Archive" ReturnType="Collection(EventsPoster2Model.stp_Select_ID_Archive_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_SelID_Client_Event" ReturnType="Collection(EventsPoster2Model.stp_SelID_Client_Event_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Ticket_for_cat" ReturnType="Collection(EventsPoster2Model.stp_Ticket_for_cat_Result)">
+            <Parameter Name="id_cat" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Ticket_Update_Event">
+            <Parameter Name="ID_Event" Mode="In" Type="Int32" />
+            <Parameter Name="num" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Update_Archive">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name_Event" Mode="In" Type="String" />
+            <Parameter Name="Event_Category_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Date_Start" Mode="In" Type="DateTime" />
+            <Parameter Name="Date_Finish" Mode="In" Type="DateTime" />
+            <Parameter Name="Сity" Mode="In" Type="String" />
+            <Parameter Name="Place" Mode="In" Type="String" />
+            <Parameter Name="Time_" Mode="In" Type="Time" />
+            <Parameter Name="Event_description" Mode="In" Type="String" />
+            <Parameter Name="Age_limitation" Mode="In" Type="Int32" />
+            <Parameter Name="Maximum_count_tickets" Mode="In" Type="Int32" />
+            <Parameter Name="Purchased_count_tickets" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Update_Cat">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Category" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Update_Client">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="BD" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Update_Event">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name_Event" Mode="In" Type="String" />
+            <Parameter Name="Event_Category_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Date_Start" Mode="In" Type="DateTime" />
+            <Parameter Name="Date_Finish" Mode="In" Type="DateTime" />
+            <Parameter Name="Сity" Mode="In" Type="String" />
+            <Parameter Name="Place" Mode="In" Type="String" />
+            <Parameter Name="Time_" Mode="In" Type="Time" />
+            <Parameter Name="Event_description" Mode="In" Type="String" />
+            <Parameter Name="Age_limitation" Mode="In" Type="Int32" />
+            <Parameter Name="Maximum_count_tickets" Mode="In" Type="Int32" />
+            <Parameter Name="Purchased_count_tickets" Mode="In" Type="Int32" />
+            <Parameter Name="Price_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Update_Pictures_Client">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="ClientID" Mode="In" Type="Int32" />
+            <Parameter Name="Name_" Mode="In" Type="String" />
+            <Parameter Name="Picture" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Update_Pictures_Event">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="EventID" Mode="In" Type="Int32" />
+            <Parameter Name="Name_" Mode="In" Type="String" />
+            <Parameter Name="Picture" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Update_Price">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="Min_" Mode="In" Type="Decimal" />
+            <Parameter Name="Ave" Mode="In" Type="Decimal" />
+            <Parameter Name="Max_" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="stp_Update_Ticket">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Event_id" Mode="In" Type="Int32" />
+            <Parameter Name="Client_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Decimal" />
+            <Parameter Name="Purchase_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Active_client_sp_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="BD" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Count_Events" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Actual_events_sp_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Event_for_today_sp_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sold_in_3_days_sp_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sold_out_all_tickets_sp_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Actual_Event_for_Client_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Cat_Event_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="stp_Client_Event_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="BD" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="stp_Clients_Event_Search_Client_Id_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Event_id" Nullable="false" />
+          <Property Type="Int32" Name="Client_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="Purchase_date" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Clients_Event_Search_Event_id_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Event_id" Nullable="false" />
+          <Property Type="Int32" Name="Client_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="Purchase_date" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Event_Category_Id_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Event_City_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Event_Client_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Event_dateNow_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_info_Archive_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Info_client_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="BD" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="stp_info_Client_Event__Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Event_id" Nullable="false" />
+          <Property Type="Int32" Name="Client_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="Purchase_date" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_info_Event_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_info_Сategories_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="stp_Name_Event_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Price_Event__Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Decimal" Name="Min_" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Ave" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Max_" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="stp_Price_Event_Search_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Price_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Select_ID_Archive_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name_Event" Nullable="false" MaxLength="300" />
+          <Property Type="Int32" Name="Event_Category_Id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Start" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Finish" Nullable="false" />
+          <Property Type="String" Name="Сity" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Place" Nullable="false" MaxLength="300" />
+          <Property Type="Time" Name="Time_" Nullable="false" />
+          <Property Type="String" Name="Event_description" Nullable="false" />
+          <Property Type="Int32" Name="Age_limitation" Nullable="false" />
+          <Property Type="Int32" Name="Maximum_count_tickets" Nullable="false" />
+          <Property Type="Int32" Name="Purchased_count_tickets" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_SelID_Client_Event_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Event_id" Nullable="false" />
+          <Property Type="Int32" Name="Client_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="Purchase_date" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="stp_Ticket_for_cat_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Event_id" Nullable="false" />
+          <Property Type="Int32" Name="Client_Id" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="Purchase_date" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EventsPoster2ModelContainer" CdmEntityContainer="EventsPoster2Entities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EventsPoster2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Archive">
+            <EntityTypeMapping TypeName="EventsPoster2Model.Archive">
+              <MappingFragment StoreEntitySet="Archive">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="EventsPoster2Model.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BD" ColumnName="BD" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients_Event_">
+            <EntityTypeMapping TypeName="EventsPoster2Model.Clients_Event_">
+              <MappingFragment StoreEntitySet="Clients_Event_">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Purchase_date" ColumnName="Purchase_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event_">
+            <EntityTypeMapping TypeName="EventsPoster2Model.Event_">
+              <MappingFragment StoreEntitySet="Event_">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures_Client">
+            <EntityTypeMapping TypeName="EventsPoster2Model.Pictures_Client">
+              <MappingFragment StoreEntitySet="Pictures_Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Name_" ColumnName="Name_" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures_Event">
+            <EntityTypeMapping TypeName="EventsPoster2Model.Pictures_Event">
+              <MappingFragment StoreEntitySet="Pictures_Event">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Name_" ColumnName="Name_" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Price">
+            <EntityTypeMapping TypeName="EventsPoster2Model.Price">
+              <MappingFragment StoreEntitySet="Price">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Min_" ColumnName="Min_" />
+                <ScalarProperty Name="Ave" ColumnName="Ave" />
+                <ScalarProperty Name="Max_" ColumnName="Max_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сategories">
+            <EntityTypeMapping TypeName="EventsPoster2Model.Сategories">
+              <MappingFragment StoreEntitySet="Сategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Active_client_sp" FunctionName="Хранилище EventsPoster2Model.Active_client_sp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.Active_client_sp_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BD" ColumnName="BD" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Count_Events" ColumnName="Count Events" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Actual_events_sp" FunctionName="Хранилище EventsPoster2Model.Actual_events_sp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.Actual_events_sp_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Event_for_today_sp" FunctionName="Хранилище EventsPoster2Model.Event_for_today_sp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.Event_for_today_sp_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sold_in_3_days_sp" FunctionName="Хранилище EventsPoster2Model.Sold_in_3_days_sp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.Sold_in_3_days_sp_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sold_out_all_tickets_sp" FunctionName="Хранилище EventsPoster2Model.Sold_out_all_tickets_sp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.Sold_out_all_tickets_sp_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище EventsPoster2Model.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище EventsPoster2Model.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище EventsPoster2Model.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище EventsPoster2Model.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище EventsPoster2Model.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище EventsPoster2Model.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище EventsPoster2Model.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="stp_Actual_Event_for_Client" FunctionName="Хранилище EventsPoster2Model.stp_Actual_Event_for_Client">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Actual_Event_for_Client_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Cat_Event" FunctionName="Хранилище EventsPoster2Model.stp_Cat_Event">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Cat_Event_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Client_Event" FunctionName="Хранилище EventsPoster2Model.stp_Client_Event">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Client_Event_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BD" ColumnName="BD" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Clients_Event_Search_Client_Id" FunctionName="Хранилище EventsPoster2Model.stp_Clients_Event_Search_Client_Id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Clients_Event_Search_Client_Id_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Purchase_date" ColumnName="Purchase_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Clients_Event_Search_Event_id" FunctionName="Хранилище EventsPoster2Model.stp_Clients_Event_Search_Event_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Clients_Event_Search_Event_id_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Purchase_date" ColumnName="Purchase_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Del_Archive" FunctionName="Хранилище EventsPoster2Model.stp_Del_Archive" />
+          <FunctionImportMapping FunctionImportName="stp_Del_Cat" FunctionName="Хранилище EventsPoster2Model.stp_Del_Cat" />
+          <FunctionImportMapping FunctionImportName="stp_Delete_Client" FunctionName="Хранилище EventsPoster2Model.stp_Delete_Client" />
+          <FunctionImportMapping FunctionImportName="stp_Delete_Date" FunctionName="Хранилище EventsPoster2Model.stp_Delete_Date" />
+          <FunctionImportMapping FunctionImportName="stp_Delete_Event_" FunctionName="Хранилище EventsPoster2Model.stp_Delete_Event_" />
+          <FunctionImportMapping FunctionImportName="stp_Delete_Pictures_Client" FunctionName="Хранилище EventsPoster2Model.stp_Delete_Pictures_Client" />
+          <FunctionImportMapping FunctionImportName="stp_Delete_Pictures_Event" FunctionName="Хранилище EventsPoster2Model.stp_Delete_Pictures_Event" />
+          <FunctionImportMapping FunctionImportName="stp_Delete_Price" FunctionName="Хранилище EventsPoster2Model.stp_Delete_Price" />
+          <FunctionImportMapping FunctionImportName="stp_Delete_Ticket" FunctionName="Хранилище EventsPoster2Model.stp_Delete_Ticket" />
+          <FunctionImportMapping FunctionImportName="stp_Delete_Ticket_Client_info" FunctionName="Хранилище EventsPoster2Model.stp_Delete_Ticket_Client_info" />
+          <FunctionImportMapping FunctionImportName="stp_Event_Category_Id" FunctionName="Хранилище EventsPoster2Model.stp_Event_Category_Id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Event_Category_Id_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Event_City" FunctionName="Хранилище EventsPoster2Model.stp_Event_City">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Event_City_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Event_Client" FunctionName="Хранилище EventsPoster2Model.stp_Event_Client">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Event_Client_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Event_Count" FunctionName="Хранилище EventsPoster2Model.stp_Event_Count" />
+          <FunctionImportMapping FunctionImportName="stp_Event_dateNow" FunctionName="Хранилище EventsPoster2Model.stp_Event_dateNow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Event_dateNow_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_info_Archive" FunctionName="Хранилище EventsPoster2Model.stp_info_Archive">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_info_Archive_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Info_client" FunctionName="Хранилище EventsPoster2Model.stp_Info_client">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Info_client_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BD" ColumnName="BD" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_info_Client_Event_" FunctionName="Хранилище EventsPoster2Model.stp_info_Client_Event_">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_info_Client_Event__Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Purchase_date" ColumnName="Purchase_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_info_Event" FunctionName="Хранилище EventsPoster2Model.stp_info_Event">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_info_Event_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_info_Сategories" FunctionName="Хранилище EventsPoster2Model.stp_info_Сategories">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_info_Сategories_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_insert_Archive" FunctionName="Хранилище EventsPoster2Model.stp_insert_Archive" />
+          <FunctionImportMapping FunctionImportName="stp_Insert_Cat" FunctionName="Хранилище EventsPoster2Model.stp_Insert_Cat" />
+          <FunctionImportMapping FunctionImportName="stp_Insert_Client" FunctionName="Хранилище EventsPoster2Model.stp_Insert_Client" />
+          <FunctionImportMapping FunctionImportName="stp_Insert_Event" FunctionName="Хранилище EventsPoster2Model.stp_Insert_Event" />
+          <FunctionImportMapping FunctionImportName="stp_insert_Pictures_Client" FunctionName="Хранилище EventsPoster2Model.stp_insert_Pictures_Client" />
+          <FunctionImportMapping FunctionImportName="stp_insert_Pictures_Event" FunctionName="Хранилище EventsPoster2Model.stp_insert_Pictures_Event" />
+          <FunctionImportMapping FunctionImportName="stp_insert_Price" FunctionName="Хранилище EventsPoster2Model.stp_insert_Price" />
+          <FunctionImportMapping FunctionImportName="stp_Insert_Ticket" FunctionName="Хранилище EventsPoster2Model.stp_Insert_Ticket" />
+          <FunctionImportMapping FunctionImportName="stp_Name_Event" FunctionName="Хранилище EventsPoster2Model.stp_Name_Event">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Name_Event_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Price_Event_" FunctionName="Хранилище EventsPoster2Model.stp_Price_Event_">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Price_Event__Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Min_" ColumnName="Min_" />
+                <ScalarProperty Name="Ave" ColumnName="Ave" />
+                <ScalarProperty Name="Max_" ColumnName="Max_" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Price_Event_Search" FunctionName="Хранилище EventsPoster2Model.stp_Price_Event_Search">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Price_Event_Search_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+                <ScalarProperty Name="Price_id" ColumnName="Price_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Select_ID_Archive" FunctionName="Хранилище EventsPoster2Model.stp_Select_ID_Archive">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Select_ID_Archive_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Event" ColumnName="Name_Event" />
+                <ScalarProperty Name="Event_Category_Id" ColumnName="Event_Category_Id" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Date_Finish" ColumnName="Date_Finish" />
+                <ScalarProperty Name="Сity" ColumnName="Сity" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Time_" ColumnName="Time_" />
+                <ScalarProperty Name="Event_description" ColumnName="Event_description" />
+                <ScalarProperty Name="Age_limitation" ColumnName="Age_limitation" />
+                <ScalarProperty Name="Maximum_count_tickets" ColumnName="Maximum_count_tickets" />
+                <ScalarProperty Name="Purchased_count_tickets" ColumnName="Purchased_count_tickets" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_SelID_Client_Event" FunctionName="Хранилище EventsPoster2Model.stp_SelID_Client_Event">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_SelID_Client_Event_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Purchase_date" ColumnName="Purchase_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Ticket_for_cat" FunctionName="Хранилище EventsPoster2Model.stp_Ticket_for_cat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventsPoster2Model.stp_Ticket_for_cat_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+                <ScalarProperty Name="Client_Id" ColumnName="Client_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Purchase_date" ColumnName="Purchase_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_Ticket_Update_Event" FunctionName="Хранилище EventsPoster2Model.stp_Ticket_Update_Event" />
+          <FunctionImportMapping FunctionImportName="stp_Update_Archive" FunctionName="Хранилище EventsPoster2Model.stp_Update_Archive" />
+          <FunctionImportMapping FunctionImportName="stp_Update_Cat" FunctionName="Хранилище EventsPoster2Model.stp_Update_Cat" />
+          <FunctionImportMapping FunctionImportName="stp_Update_Client" FunctionName="Хранилище EventsPoster2Model.stp_Update_Client" />
+          <FunctionImportMapping FunctionImportName="stp_Update_Event" FunctionName="Хранилище EventsPoster2Model.stp_Update_Event" />
+          <FunctionImportMapping FunctionImportName="stp_Update_Pictures_Client" FunctionName="Хранилище EventsPoster2Model.stp_Update_Pictures_Client" />
+          <FunctionImportMapping FunctionImportName="stp_Update_Pictures_Event" FunctionName="Хранилище EventsPoster2Model.stp_Update_Pictures_Event" />
+          <FunctionImportMapping FunctionImportName="stp_Update_Price" FunctionName="Хранилище EventsPoster2Model.stp_Update_Price" />
+          <FunctionImportMapping FunctionImportName="stp_Update_Ticket" FunctionName="Хранилище EventsPoster2Model.stp_Update_Ticket" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

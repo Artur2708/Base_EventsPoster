@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2cbbd986786f40f199deb483aca84e82" Name="Diagram1">
+        <EntityTypeShape EntityType="EventsPoster2Model.Archive" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventsPoster2Model.Clients" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventsPoster2Model.Clients_Event_" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventsPoster2Model.Event_" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventsPoster2Model.Pictures_Client" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventsPoster2Model.Pictures_Event" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventsPoster2Model.Price" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventsPoster2Model.Сategories" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="EventsPoster2Model.FK__Archive__Event_C__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="EventsPoster2Model.FK__Clients_E__Clien__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="EventsPoster2Model.FK__Pictures___Clien__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventsPoster2Model.FK__Clients_E__Event__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="EventsPoster2Model.FK__Event___Event_Ca__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="EventsPoster2Model.FK__Event___Price_id__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="EventsPoster2Model.FK__Pictures___Event__5070F446" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
